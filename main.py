@@ -10,7 +10,7 @@ from pkg.plugin.events import *  # 导入事件类
 
 
 # 注册插件
-@register(name="ImageInterruption", description="随机复读图片，并拦截图片", version="0.4", author="Rio")
+@register(name="ImageInterruption", description="随机复读图片，并拦截图片", version="0.5", author="Rio")
 class MyPlugin(BasePlugin):
 
     # 插件加载时触发
@@ -26,7 +26,7 @@ class MyPlugin(BasePlugin):
     async def person_normal_message_received(self, ctx: EventContext):
 
         _type = ctx.event.launcher_type
-        ctx.add_return("reply", [ctx.event])
+        ctx.add_return("reply", ["消息类型：{}".format(ctx)])
         
     #     msg = ctx.event.text_message  # 这里的 event 即为 PersonNormalMessageReceived 的对象
     #     if msg == "hello":  # 如果消息为hello
