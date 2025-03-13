@@ -26,7 +26,7 @@ class MyPlugin(BasePlugin):
     async def person_normal_message_received(self, ctx: EventContext):
 
         _type = ctx.event.launcher_type
-        ctx.add_return("reply", ["消息类型：{}".format(_type)])
+        ctx.add_return("reply", [ctx.event])
         
     #     msg = ctx.event.text_message  # 这里的 event 即为 PersonNormalMessageReceived 的对象
     #     if msg == "hello":  # 如果消息为hello
