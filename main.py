@@ -1,9 +1,16 @@
-from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
+from pkg.plugin.context import (
+    register,
+    handler,
+    llm_func,
+    BasePlugin,
+    APIHost,
+    EventContext,
+)
 from pkg.plugin.events import *  # 导入事件类
 
 
 # 注册插件
-@register(name="Hello", description="hello world", version="0.1", author="RockChinQ")
+@register(name="ImageInterruption", description="随机复读图片，并拦截图片", version="0.2", author="Rio")
 class MyPlugin(BasePlugin):
 
     # 插件加载时触发
@@ -15,8 +22,12 @@ class MyPlugin(BasePlugin):
         pass
 
     # 当收到个人消息时触发
-    # @handler(PersonNormalMessageReceived)
-    # async def person_normal_message_received(self, ctx: EventContext):
+    @handler(PersonNormalMessageReceived)
+    async def person_normal_message_received(self, ctx: EventContext):
+
+        _type = ctx.event.launcher_type
+        ctx.add_return("reply", ["消息类型：{}".format(_type)])
+        
     #     msg = ctx.event.text_message  # 这里的 event 即为 PersonNormalMessageReceived 的对象
     #     if msg == "hello":  # 如果消息为hello
 
@@ -30,12 +41,8 @@ class MyPlugin(BasePlugin):
     #         ctx.prevent_default()
 
     # 当收到群消息时触发
-    @handler(GroupNormalMessageReceived)
-    async def group_normal_message_received(self, ctx: EventContext):
-        msg = ctx.event.text_message  # 这里的 event 即为 GroupNormalMessageReceived 的对象
-        _type = ctx.event.launcher_type
-        ctx.add_return("reply", ["消息类型：{}".format(_type)])
-        
+    # @handler(GroupNormalMessageReceived)
+    # async def group_normal_message_received(self, ctx: EventContext):
 
     # 插件卸载时触发
     def __del__(self):
