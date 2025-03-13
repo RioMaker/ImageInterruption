@@ -10,7 +10,7 @@ from pkg.plugin.events import *  # 导入事件类
 
 
 # 注册插件
-@register(name="ImageInterruption", description="随机复读图片，并拦截图片", version="0.2", author="Rio")
+@register(name="ImageInterruption", description="随机复读图片，并拦截图片", version="0.3", author="Rio")
 class MyPlugin(BasePlugin):
 
     # 插件加载时触发
